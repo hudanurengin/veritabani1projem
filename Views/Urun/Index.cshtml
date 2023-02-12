@@ -1,0 +1,41 @@
+﻿@using alısveristakip.Models.entity
+@model List<urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Ürünler</h2>
+
+<table class=" table table-bordered">
+    <tr>
+        <th>Ürün Id</th>
+        <th>Ürün Adı</th>
+        <th>Ürün Kategorisi</th>
+        <th>Fiyatı</th>
+        <th>Markası</th>
+        <th>Stok Durumu</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+
+    </tr>
+    <tbody>
+        @foreach (var urn in Model)
+        {
+        <tr>
+            <th>@urn.Urun_ID</th>
+            <td>@urn.UrunAd</td>
+            <td>@urn.kategori.KategoriAd</td>
+            <td>@urn.Fiyat</td>
+            <td>@urn.Marka</td>
+            <td>@urn.Stok</td>
+            <td><a href="/URUN/SIL/@urn.Urun_ID" class="btn btn-danger">SİL</a></td>
+            <td><a href="/URUN/UrunGetir/@urn.Urun_ID" class="btn btn-success">GÜNCELLE</a></td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="/URUN/UrunEkle/" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+
+

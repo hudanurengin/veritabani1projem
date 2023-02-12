@@ -1,0 +1,36 @@
+﻿@using alısveristakip.Models.entity
+@model List<kullanici>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class=" table table-bordered">
+    <tr>
+        <th>Müşteri Id</th>
+        <th>Müşteri Adı</th>
+        <th>Müşteri Soyadı</th>
+        <th>Maili</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+
+    </tr>
+    <tbody>
+        @foreach (var mus in Model)
+        {
+            <tr>
+                <th>@mus.KullanıcıID</th>
+                <td>@mus.Ad</td>
+                <td>@mus.Soyad</td>
+                <td>@mus.Mail</td>
+                <td><a href="/MUSTERI/SIL/@mus.KullanıcıID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/MUSTERI/MusteriGetir/@mus.KullanıcıID" class="btn btn-success">GÜNCELLE</a></td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Musteri/YeniMusteri/" class="btn btn-primary">YENİ MÜŞTERİ EKLE</a>
+
+

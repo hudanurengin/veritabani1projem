@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AlisverisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="urun" Relationship="Self.FK_urun_kategori" FromRole="kategori" ToRole="urun" />
+  </EntityType>
+  <EntityType Name="kullanici">
+    <Key>
+      <PropertyRef Name="KullanıcıID" />
+    </Key>
+    <Property Name="KullanıcıID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="satis" Relationship="Self.FK_satis_kullanici" FromRole="kullanici" ToRole="satis" />
+  </EntityType>
+  <EntityType Name="satis">
+    <Key>
+      <PropertyRef Name="SatisID" />
+    </Key>
+    <Property Name="SatisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Urun" Type="Int32" Nullable="false" />
+    <Property Name="Adet" Type="Int32" Nullable="false" />
+    <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="KullanıcıID" Type="Int32" Nullable="false" />
+    <Property Name="Statatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="kullanici" Relationship="Self.FK_satis_kullanici" FromRole="satis" ToRole="kullanici" />
+    <NavigationProperty Name="urun1" Relationship="Self.FK_satis_urun" FromRole="satis" ToRole="urun" />
+    <NavigationProperty Name="urun2" Relationship="Self.FK_satis_urun1" FromRole="satis" ToRole="urun" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="urun">
+    <Key>
+      <PropertyRef Name="Urun_ID" />
+    </Key>
+    <Property Name="Urun_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UrunKategori" Type="Int16" />
+    <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Marka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Stok" Type="Byte" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="kategori" Relationship="Self.FK_urun_kategori" FromRole="urun" ToRole="kategori" />
+    <NavigationProperty Name="satis" Relationship="Self.FK_satis_urun" FromRole="urun" ToRole="satis" />
+    <NavigationProperty Name="satis1" Relationship="Self.FK_satis_urun1" FromRole="urun" ToRole="satis" />
+  </EntityType>
+  <Association Name="FK_urun_kategori">
+    <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+    <End Role="urun" Type="Self.urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="urun">
+        <PropertyRef Name="UrunKategori" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satis_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="satis" Type="Self.satis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="KullanıcıID" />
+      </Principal>
+      <Dependent Role="satis">
+        <PropertyRef Name="KullanıcıID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satis_urun">
+    <End Role="urun" Type="Self.urun" Multiplicity="1" />
+    <End Role="satis" Type="Self.satis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urun">
+        <PropertyRef Name="Urun_ID" />
+      </Principal>
+      <Dependent Role="satis">
+        <PropertyRef Name="Urun" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satis_urun1">
+    <End Role="urun" Type="Self.urun" Multiplicity="1" />
+    <End Role="satis" Type="Self.satis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urun">
+        <PropertyRef Name="Urun_ID" />
+      </Principal>
+      <Dependent Role="satis">
+        <PropertyRef Name="Urun" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AlisverisEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="kategori" EntityType="Self.kategori" />
+    <EntitySet Name="kullanici" EntityType="Self.kullanici" />
+    <EntitySet Name="satis" EntityType="Self.satis" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="urun" EntityType="Self.urun" />
+    <AssociationSet Name="FK_urun_kategori" Association="Self.FK_urun_kategori">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="urun" EntitySet="urun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satis_kullanici" Association="Self.FK_satis_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="satis" EntitySet="satis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satis_urun" Association="Self.FK_satis_urun">
+      <End Role="urun" EntitySet="urun" />
+      <End Role="satis" EntitySet="satis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satis_urun1" Association="Self.FK_satis_urun1">
+      <End Role="urun" EntitySet="urun" />
+      <End Role="satis" EntitySet="satis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

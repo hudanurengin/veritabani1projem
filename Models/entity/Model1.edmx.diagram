@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f8b444800707446bb82a502b76f2ea8d" Name="Diagram1">
+        <EntityTypeShape EntityType="AlisverisModel.kategori" Width="1.5" PointX="4.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlisverisModel.kullanici" Width="1.5" PointX="4.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlisverisModel.satis" Width="1.5" PointX="7.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlisverisModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlisverisModel.urun" Width="1.5" PointX="7.25" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="AlisverisModel.FK_urun_kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="AlisverisModel.FK_satis_kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="AlisverisModel.FK_satis_urun" ManuallyRouted="false" />
+        <AssociationConnector Association="AlisverisModel.FK_satis_urun1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
